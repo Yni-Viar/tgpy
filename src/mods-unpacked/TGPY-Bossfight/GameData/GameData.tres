@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GameData" load_steps=8 format=3 uid="uid://dexygxjm8ki08"]
+
+[ext_resource type="Script" path="res://Scripts/GameData/GameData.gd" id="1_3oe34"]
+[ext_resource type="Resource" uid="uid://cohe4hksaldgl" path="res://mods-unpacked/TGPY-Bossfight/Player/PlayerClassResources/tgpy_spectator.tres" id="1_5r2r8"]
+[ext_resource type="Resource" uid="uid://f2kqasrj2c78" path="res://mods-unpacked/TGPY-Bossfight/Player/PlayerClassResources/tgpy_human.tres" id="2_rg8lf"]
+[ext_resource type="Resource" uid="uid://ix8t8u5othlh" path="res://mods-unpacked/TGPY-Bossfight/Player/PlayerClassResources/tgpy_boty.tres" id="3_ju560"]
+[ext_resource type="PackedScene" uid="uid://sewkqqotwy3w" path="res://Assets/ActionItems/tv.tscn" id="3_ntv1f"]
+[ext_resource type="PackedScene" uid="uid://c31sglltxl6mm" path="res://Assets/NPC/vacuum_cleaner_prop.tscn" id="4_boty2"]
+[ext_resource type="PackedScene" uid="uid://boagqr42vbikv" path="res://mods-unpacked/TGPY-Bossfight/Assets/ActionItems/SugarMilkCC0.tscn" id="5_3gpox"]
+
+[resource]
+script = ExtResource("1_3oe34")
+classes = Array[Resource("res://FPSController/PlayerClassResources/BaseClass.gd")]([ExtResource("1_5r2r8"), ExtResource("2_rg8lf"), ExtResource("3_ju560")])
+map_objects = Array[PackedScene]([ExtResource("3_ntv1f"), ExtResource("4_boty2"), ExtResource("5_3gpox")])
+npcs = Array[PackedScene]([])

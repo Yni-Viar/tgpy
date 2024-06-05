@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://ta7ug1xxli8k"]
+
+[ext_resource type="Script" path="res://Scripts/BaseWindow.gd" id="1_eh2s6"]
+[ext_resource type="Theme" uid="uid://4k2un7nm7xc6" path="res://UITheme.tres" id="1_ffleg"]
+[ext_resource type="PackedScene" uid="uid://i5haaf1g1dh5" path="res://ModLoaderUI/UserProfiles.tscn" id="1_q56c3"]
+
+[node name="ModsWindow" type="Window"]
+position = Vector2i(32, 36)
+size = Vector2i(600, 600)
+theme = ExtResource("1_ffleg")
+script = ExtResource("1_eh2s6")
+
+[node name="UserProfilePopup" parent="." instance=ExtResource("1_q56c3")]
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]

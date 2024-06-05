@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="BaseClass" load_steps=2 format=3 uid="uid://ix8t8u5othlh"]
+
+[ext_resource type="Script" path="res://FPSController/PlayerClassResources/BaseClass.gd" id="1_3wvhy"]
+
+[resource]
+script = ExtResource("1_3wvhy")
+player_class_name = "BOTY"
+player_class_description = "BOTY_DESCR"
+spawn_points = Array[String](["Main/Game/Office/entityspawn"])
+player_model_source = "res://mods-unpacked/TGPY-Bossfight/Player/PlayerClassPrefab/robot.tscn"
+player_ragdoll_source = "res://FPSController/PlayerClassPrefabGameover/robot.tscn"
+speed = 4.0
+jump = 4.0
+sprint_enabled = false
+move_sounds_enabled = false
+footstep_sounds = Array[String]([])
+sprint_sounds = Array[String]([])
+unique_type_id = 1
+health = Array[float]([500.0])
+custom_spawn = false
+custom_camera = false
+custom_shader = ""
+class_color = Color(0.752941, 0, 0, 0.752941)
+enable_inventory = false
+can_move = true

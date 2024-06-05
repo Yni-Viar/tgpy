@@ -1,0 +1,14 @@
+keys,en,ru
+ROUNDSTART_WELCOME,The round is starting soon...,Раунд скоро начнется...
+ROUNDSTART_PLAYERS,players connected.,игроков подключено.
+ADMIN_WELCOME,Admin panel,Админ панель
+ADMIN_PASSWORD,"Please, enter the password!","Пожалуйста, введите пароль!"
+PLAYERSLIST_INFO,Player list,Список игроков
+HUMAN,Human being,Человек
+HUMAN_DESCR,You need to fight all bosses to win,"Вам нужно победить боссов, чтобы выиграть"
+BOTY,Robot,Робот
+BOTY_DESCR,"You should help bosses, but beware humans","Вам нужно помогать боссам, но опасайтесь людей"
+EXIT,Exit,Выход
+NOT_SO_FAST,Not so fast!,Не так быстро!
+SCULPTURE,The Sculpture,Скульптура
+ELECTROBUN,Electrobun,Электроколобок

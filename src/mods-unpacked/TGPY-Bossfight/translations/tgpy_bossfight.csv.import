@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c1ly43egblwmk"
+
+[deps]
+
+files=["res://mods-unpacked/TGPY-Bossfight/translations/tgpy_bossfight.en.translation", "res://mods-unpacked/TGPY-Bossfight/translations/tgpy_bossfight.ru.translation"]
+
+source_file="res://mods-unpacked/TGPY-Bossfight/translations/tgpy_bossfight.csv"
+dest_files=["res://mods-unpacked/TGPY-Bossfight/translations/tgpy_bossfight.en.translation", "res://mods-unpacked/TGPY-Bossfight/translations/tgpy_bossfight.ru.translation"]
+
+[params]
+
+compress=true
+delimiter=0

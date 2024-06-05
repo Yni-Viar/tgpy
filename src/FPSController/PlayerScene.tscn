@@ -1,0 +1,211 @@
+[gd_scene load_steps=17 format=3 uid="uid://cu440emlhve1m"]
+
+[ext_resource type="Script" path="res://FPSController/PlayerScript.gd" id="1_rticr"]
+[ext_resource type="Script" path="res://FPSController/Commands.gd" id="2_acwsa"]
+[ext_resource type="Script" path="res://FPSController/PlayerRecoil/Recoil.gd" id="2_hmiop"]
+[ext_resource type="Material" uid="uid://ci0m68xlui2q5" path="res://Shaders/EdgeDetectShade.tres" id="4_fjjm1"]
+[ext_resource type="Material" uid="uid://ckvs50m51c56c" path="res://Shaders/DitherShade.tres" id="4_kaaud"]
+[ext_resource type="Script" path="res://FPSController/PlayerSync.gd" id="6_rhaos"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="7_wjhm0"]
+[ext_resource type="Texture2D" uid="uid://cfcxmt02700jh" path="res://Assets/HUD/Touchscreen/click.png" id="8_cdimw"]
+[ext_resource type="Script" path="res://Scripts/UI/TouchUIClick.gd" id="9_v1a12"]
+[ext_resource type="Texture2D" uid="uid://bdw5mkmw3k4md" path="res://Assets/HUD/Touchscreen/rclick.png" id="10_xrjm7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3c6ve"]
+flip_faces = true
+orientation = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xm0hl"]
+orientation = 2
+
+[sub_resource type="CapsuleShape3D" id="1"]
+radius = 0.371158
+height = 2.64793
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6h10r"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:player_name")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:can_move")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:current_health")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+
+[sub_resource type="Animation" id="Animation_i7x7w"]
+resource_name = "Walk"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"FootstepAnimate"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uiy40"]
+_data = {
+"Walk": SubResource("Animation_i7x7w")
+}
+
+[node name="Player" type="CharacterBody3D" groups=["Players"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_rticr")
+
+[node name="Commands" type="Node" parent="."]
+script = ExtResource("2_acwsa")
+
+[node name="PlayerModel" type="Node3D" parent="."]
+
+[node name="PlayerHead" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.968611, -0.292869)
+
+[node name="PlayerRecoil" type="Node3D" parent="PlayerHead"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.968611, 0.292869)
+script = ExtResource("2_hmiop")
+
+[node name="PlayerCamera" type="Camera3D" parent="PlayerHead/PlayerRecoil"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96861, -0.159767)
+cull_mask = 524287
+
+[node name="EdgeDetectShader" type="MeshInstance3D" parent="PlayerHead/PlayerRecoil/PlayerCamera"]
+visible = false
+extra_cull_margin = 4096.0
+mesh = SubResource("PlaneMesh_3c6ve")
+surface_material_override/0 = ExtResource("4_fjjm1")
+
+[node name="DitherShader" type="MeshInstance3D" parent="PlayerHead/PlayerRecoil/PlayerCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.038706)
+visible = false
+mesh = SubResource("PlaneMesh_xm0hl")
+surface_material_override/0 = ExtResource("4_kaaud")
+
+[node name="VisionRadius" type="RayCast3D" parent="PlayerHead/PlayerRecoil"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.968611, -0.292869)
+visible = false
+target_position = Vector3(0, 0, -128)
+collision_mask = 31
+
+[node name="RayCast3D" type="RayCast3D" parent="PlayerHead/PlayerRecoil"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.968611, -0.292869)
+target_position = Vector3(0, 0, -4)
+collision_mask = 31
+
+[node name="PlayerHand" type="Marker3D" parent="PlayerHead/PlayerRecoil"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.968611, -0.961648)
+
+[node name="ItemSpawn" type="Marker3D" parent="PlayerHead"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.197413, -0.0797351)
+
+[node name="CollisionBodyCapsule" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0386829, 0)
+shape = SubResource("1")
+
+[node name="WalkSounds" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.951681, 0)
+max_distance = 12.0
+
+[node name="InteractSound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.783644, 0)
+max_distance = 2.3
+
+[node name="PlayerSync" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_6h10r")
+script = ExtResource("6_rhaos")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uiy40")
+}
+
+[node name="TouchUI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Virtual joystick left" parent="TouchUI" instance=ExtResource("7_wjhm0")]
+layout_mode = 1
+offset_left = 64.0
+offset_top = -360.0
+offset_right = 364.0
+offset_bottom = -56.0
+action_left = "move_left"
+action_right = "move_right"
+action_up = "move_forward"
+action_down = "move_backward"
+
+[node name="Virtual joystick right" parent="TouchUI" instance=ExtResource("7_wjhm0")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -408.0
+offset_top = -360.0
+offset_right = -108.0
+offset_bottom = -56.0
+grow_horizontal = 0
+joystick_mode = 1
+use_input_actions = false
+
+[node name="Click" type="TextureButton" parent="TouchUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 1.0
+anchor_right = 0.333
+anchor_bottom = 1.0
+offset_left = -63.36
+offset_top = -248.0
+offset_right = 64.64
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("8_cdimw")
+texture_pressed = ExtResource("8_cdimw")
+texture_hover = ExtResource("8_cdimw")
+texture_focused = ExtResource("8_cdimw")
+script = ExtResource("9_v1a12")
+
+[node name="Rclick" type="TextureButton" parent="TouchUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.633
+anchor_top = 1.0
+anchor_right = 0.633
+anchor_bottom = 1.0
+offset_left = -63.36
+offset_top = -248.0
+offset_right = 64.64
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("10_xrjm7")
+texture_pressed = ExtResource("10_xrjm7")
+texture_hover = ExtResource("10_xrjm7")
+texture_focused = ExtResource("10_xrjm7")
+script = ExtResource("9_v1a12")
+
+[connection signal="pressed" from="TouchUI/Click" to="TouchUI/Click" method="_on_pressed"]
+[connection signal="pressed" from="TouchUI/Rclick" to="TouchUI/Rclick" method="_on_rclick_pressed"]

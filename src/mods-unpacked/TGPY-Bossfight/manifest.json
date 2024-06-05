@@ -1,0 +1,21 @@
+{
+	"name": "Bossfight",
+	"namespace": "TGPY",
+	"version_number": "0.1.0",
+	"description": "Sample bossfight mode",
+	"website_url": "https://github.com/Yni-Viar/tgpy",
+	"dependencies": [],
+	"extra": {
+		"godot": {
+			"authors": ["AuthorName"],
+			"tags": ["tag1", "tag2"],
+			"description_rich": "",
+			"optional_dependencies": [],
+			"load_before": [],
+			"incompatibilities": [],
+			"compatible_mod_loader_version": ["6.2.0"],
+			"compatible_game_version": ["0.1.0"],
+			"config_schema": {}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlomqw6dn0g8e"]
+
+[ext_resource type="Theme" uid="uid://4k2un7nm7xc6" path="res://UITheme.tres" id="1_twxqw"]
+[ext_resource type="Script" path="res://Scripts/MessageBox.gd" id="1_wyakd"]
+
+[node name="PopUp" type="Window"]
+position = Vector2i(32, 36)
+size = Vector2i(400, 100)
+theme = ExtResource("1_twxqw")
+script = ExtResource("1_wyakd")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(400, 100)
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 3
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
