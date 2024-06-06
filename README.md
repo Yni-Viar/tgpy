@@ -20,3 +20,5 @@ Previously, this platform was the part of *SCP: Site Online*, but now it is a fu
 4. Choose your *desktop* platform and compile it in your folder. 
 
 > Touchscreen platforms are also supported, but due to Godot 4.2 OpenGL renderer incompleteness, it is **not** recommended to export to *mobile* platforms
+
+![image](./src/icon.png "title")
