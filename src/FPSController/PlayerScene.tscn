@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cu440emlhve1m"]
+[gd_scene load_steps=19 format=3 uid="uid://cu440emlhve1m"]
 
 [ext_resource type="Script" path="res://FPSController/PlayerScript.gd" id="1_rticr"]
 [ext_resource type="Script" path="res://FPSController/Commands.gd" id="2_acwsa"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cfcxmt02700jh" path="res://Assets/HUD/Touchscreen/click.png" id="8_cdimw"]
 [ext_resource type="Script" path="res://Scripts/UI/TouchUIClick.gd" id="9_v1a12"]
 [ext_resource type="Texture2D" uid="uid://bdw5mkmw3k4md" path="res://Assets/HUD/Touchscreen/rclick.png" id="10_xrjm7"]
+[ext_resource type="Script" path="res://Scripts/UI/TouchBar.gd" id="11_0i2tu"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3c6ve"]
 flip_faces = true
@@ -63,6 +64,9 @@ tracks/0/keys = {
 _data = {
 "Walk": SubResource("Animation_i7x7w")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5dgv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
 collision_layer = 2
@@ -136,7 +140,6 @@ libraries = {
 }
 
 [node name="TouchUI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -156,32 +159,16 @@ action_right = "move_right"
 action_up = "move_forward"
 action_down = "move_backward"
 
-[node name="Virtual joystick right" parent="TouchUI" instance=ExtResource("7_wjhm0")]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -408.0
-offset_top = -360.0
-offset_right = -108.0
-offset_bottom = -56.0
-grow_horizontal = 0
-joystick_mode = 1
-use_input_actions = false
-
 [node name="Click" type="TextureButton" parent="TouchUI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.333
-anchor_top = 1.0
-anchor_right = 0.333
-anchor_bottom = 1.0
-offset_left = -63.36
-offset_top = -248.0
-offset_right = 64.64
-offset_bottom = -120.0
-grow_horizontal = 2
-grow_vertical = 0
+anchor_top = 0.356
+anchor_bottom = 0.356
+offset_left = 128.0
+offset_top = -64.48
+offset_right = 256.0
+offset_bottom = 63.52
+grow_vertical = 2
 texture_normal = ExtResource("8_cdimw")
 texture_pressed = ExtResource("8_cdimw")
 texture_hover = ExtResource("8_cdimw")
@@ -191,14 +178,14 @@ script = ExtResource("9_v1a12")
 [node name="Rclick" type="TextureButton" parent="TouchUI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.633
-anchor_top = 1.0
-anchor_right = 0.633
-anchor_bottom = 1.0
-offset_left = -63.36
-offset_top = -248.0
-offset_right = 64.64
-offset_bottom = -120.0
+anchor_left = 0.004
+anchor_top = 0.178
+anchor_right = 0.004
+anchor_bottom = 0.178
+offset_left = 120.32
+offset_top = -64.24
+offset_right = 248.32
+offset_bottom = 63.76
 grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("10_xrjm7")
@@ -207,5 +194,21 @@ texture_hover = ExtResource("10_xrjm7")
 texture_focused = ExtResource("10_xrjm7")
 script = ExtResource("9_v1a12")
 
+[node name="TouchBar" type="Panel" parent="TouchUI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1416.0
+offset_top = -540.0
+offset_bottom = 548.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o5dgv")
+script = ExtResource("11_0i2tu")
+
 [connection signal="pressed" from="TouchUI/Click" to="TouchUI/Click" method="_on_pressed"]
 [connection signal="pressed" from="TouchUI/Rclick" to="TouchUI/Rclick" method="_on_rclick_pressed"]
+[connection signal="gui_input" from="TouchUI/TouchBar" to="TouchUI/TouchBar" method="_on_gui_input"]
