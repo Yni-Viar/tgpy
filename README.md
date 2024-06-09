@@ -5,7 +5,7 @@ A moddable multiplayer game platform. Currently in *alpha* state of development,
 Previously, this platform was the part of *SCP: Site Online*, but now it is a fully rewritten on GDScript platform to enable mod support.
 
 - Most assets are licensed by [CC0](https://creativecommons.org/public-domain/cc0/) license (and are borrowed from [PolyHaven](https://polyhaven.com/models)).
-- Some models were created by Yni, and are licensed under CC0 license.
+- Some models were created by Yni, and are licensed under CC0 or CC-BY license.
 - Some assets are licensed by CC-BY or CC-BY-SA licenses.
 
 - The code is licensed by [MIT License](/LICENSE.MIT).
