@@ -7,6 +7,7 @@ func _ready():
 	GDsh.add_command("classlist", class_list, "Returns all class names and it's ids")
 	GDsh.add_command("givehp", set_health, "Adds or depletes health values")
 	GDsh.add_command("give", give, "Gives an item to you.")
+	GDsh.add_command("give_item", give_item, "Gives an item into inventory")
 	pass
 
 
@@ -34,10 +35,10 @@ func class_list(args: Array):
 
 func set_health(args: Array):
 	if args.size() == 1:
-		get_parent().rpc_id(1, "health_manage", args[0], 0, "Forced health change")
+		get_parent().rpc_id(multiplayer.get_unique_id(), "health_manage", float(args[0]), 0, "Forced health change")
 		return "Given " + args[0] + " to your health"
 	elif args.size() == 2:
-		get_parent().rpc_id(1, "health_manage", args[0], args[1], "Forced health change")
+		get_parent().rpc_id(multiplayer.get_unique_id(), "health_manage", float(args[0]), int(args[1]), "Forced health change")
 		return "Given " + args[0] + " to your health " + args[1]
 	else:
 		return "Error. Needed 1 argument, if you want to add/deplete to generic
@@ -60,4 +61,16 @@ func give_cmd(key: int, type: int):
 			nodepath = "MapObjects"
 		1:
 			nodepath = "Npcs"
+		2:
+			nodepath = "Items"
 	get_parent().get_parent().get_node(nodepath).rpc_id(1, "call_add_or_remove_item", true, key, get_tree().root.get_node("Main/Game/" + str(multiplayer.get_unique_id()) + "/PlayerHead/ItemSpawn").get_path())
+
+func give_item(args: Array):
+	if args.size() == 1:
+		if int(args[0]) < get_tree().root.get_node("Main/Game/").game_data.items.size() && int(args[0]) >= 0:
+			get_parent().get_node("InventoryUI/Inventory").add_item(int(args[0]))
+			return "An item is added to inventory"
+		else:
+			return "Write a valid number of the item!"
+	else:
+		return "Write a valid number of the item! Also you need only 1 argumenm"

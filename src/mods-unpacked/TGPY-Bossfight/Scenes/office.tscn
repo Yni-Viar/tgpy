@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bsv4bn1kgu5pm" path="res://mods-unpacked/TGPY-Bossfight/Assets/Models/laptop.tscn" id="11_w0uok"]
 [ext_resource type="PackedScene" uid="uid://sewkqqotwy3w" path="res://Assets/ActionItems/tv.tscn" id="12_dtlfa"]
 [ext_resource type="PackedScene" uid="uid://tc0yloosr1y4" path="res://mods-unpacked/TGPY-Bossfight/Assets/Models/Sofa.tscn" id="13_y0yqx"]
-[ext_resource type="PackedScene" uid="uid://boagqr42vbikv" path="res://mods-unpacked/TGPY-Bossfight/Assets/ActionItems/SugarMilkCC0.tscn" id="14_tqwsn"]
+[ext_resource type="PackedScene" uid="uid://boagqr42vbikv" path="res://mods-unpacked/TGPY-Bossfight/Items/Pickables/item_sugarmilk.tscn" id="14_tqwsn"]
 [ext_resource type="PackedScene" uid="uid://bvpq7p8vsx8ur" path="res://Assets/NPC/vacuum_cleaner.tscn" id="15_udqd7"]
 [ext_resource type="Script" path="res://Scripts/ButtonSystem/ElevatorButton.gd" id="19_n76e0"]
 [ext_resource type="Texture2D" uid="uid://dba158kan7axa" path="res://Assets/Interact/ButtonPrefab/button_texture.png" id="20_lphl0"]

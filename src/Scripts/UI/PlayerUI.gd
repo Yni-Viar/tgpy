@@ -25,7 +25,8 @@ func _input(event):
 		input_values("playerlist")
 	if Input.is_action_just_pressed("console"):
 		input_values("console")
-	
+	if Input.is_action_just_pressed("human_inventory"):
+		input_values("inventory")
 
 func input_values(state: String):
 	match state:
@@ -57,6 +58,13 @@ func input_values(state: String):
 				special_screen = true
 			else:
 				$PauseMenu.hide()
+				special_screen = false
+		"inventory":
+			if !special_screen:
+				get_tree().root.get_node("Main/Game/" + str(multiplayer.get_unique_id()) + "/InventoryUI").show()
+				special_screen = true
+			else:
+				get_tree().root.get_node("Main/Game/" + str(multiplayer.get_unique_id()) + "/InventoryUI").hide()
 				special_screen = false
 
 

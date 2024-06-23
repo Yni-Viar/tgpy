@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dkhtsi7eo8ioa"]
+
+[ext_resource type="Script" path="res://InventorySystem/Items/Item.gd" id="1_oq682"]
+[ext_resource type="Texture2D" uid="uid://rmip0c5nqap0" path="res://mods-unpacked/TGPY-Bossfight/Items/Res/item_gun1.png" id="2_ckt20"]
+
+[resource]
+script = ExtResource("1_oq682")
+id = 0
+name = "Shotgun"
+texture = ExtResource("2_ckt20")
+size = Vector2i(2, 1)
+pickable_path = "res://mods-unpacked/TGPY-Bossfight/Items/Pickables/item_shotgun.tscn"
+pickup_sound_path = "res://Sounds/Interact/impactMetal_light_001.ogg"
+first_person_prefab_path = "res://mods-unpacked/TGPY-Bossfight/Items/FPPrefab/shotgun.tscn"
+one_time_use = false
+upgrade_rough = Array[int]([])
+upgrade_coarse = Array[int]([])
+upgrade_one_to_one = Array[int]([])
+upgrade_fine = Array[int]([])
+upgrade_very_fine = Array[int]([])

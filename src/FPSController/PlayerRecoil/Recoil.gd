@@ -26,14 +26,14 @@ func _process(delta):
 	if recoil.z == 0 and aimRecoil.z == 0:
 		global_rotation.z = 0
 
-func recoilFire(isAiming : bool = false):
-	if isAiming:
+func recoil_fire(is_aiming : bool = false):
+	if is_aiming:
 		targetRotation += Vector3(aimRecoil.x, randf_range(-aimRecoil.y, aimRecoil.y), randf_range(-aimRecoil.z, aimRecoil.z))
 	else:
 		targetRotation += Vector3(recoil.x, randf_range(-recoil.y, recoil.y), randf_range(-recoil.z, recoil.z))
 
-func setRecoil(newRecoil : Vector3):
-	recoil = newRecoil
+func set_recoil(new_recoil : Vector3):
+	recoil = new_recoil
 
-func setAimRecoil(newRecoil : Vector3):
-	aimRecoil = newRecoil
+func set_aim_recoil(new_recoil : Vector3):
+	aimRecoil = new_recoil

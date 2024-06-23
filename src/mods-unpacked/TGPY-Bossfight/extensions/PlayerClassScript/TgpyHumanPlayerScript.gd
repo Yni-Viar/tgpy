@@ -2,7 +2,6 @@ extends HumanPlayerScript
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var ray: RayCast3D
-@export var level: int = 1
 var sound_path: AudioStreamPlayer3D
 @export var hit_sounds: Array[AudioStream]
 
@@ -17,7 +16,7 @@ func on_update(delta):
 			sound_path.stream = hit_sounds[rng.randi_range(0, hit_sounds.size() - 1)]
 			sound_path.play()
 			if collider is BossCommon:
-				collider.rpc("health_manage", -8 * level, get_parent().get_parent().get_path())
+				collider.rpc("health_manage", -8)
 			elif collider is PlayerScript:
 				if collider.unique_type_id == 1:
 					collider.rpc("health_manage", -20, 0, "Don't be a bad boy")

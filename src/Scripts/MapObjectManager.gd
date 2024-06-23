@@ -5,7 +5,7 @@ class_name MapObjectManager
 ## Created by Xandromeda, ported to GDscript by Yni
 
 
-## 0 is object, 1 is npc
+## 0 is object, 1 is npc, 2 is item
 @export var object_type: int
 ## Server-side list to keep track of world items
 var world_objects: Array[Array]
@@ -25,6 +25,10 @@ func object_existance_check(id: int) -> bool:
 				return false
 		1:
 			if id >= get_tree().root.get_node("Main/Game/").game_data.npcs.size() || id < 0:
+				printerr("Could not spawn an object")
+				return false
+		2:
+			if id >= get_tree().root.get_node("Main/Game/").game_data.items.size() || id < 0:
 				printerr("Could not spawn an object")
 				return false
 		_:
@@ -47,6 +51,10 @@ func client_add_object(type: int, id: int, pos: Vector3):
 		1:
 			var npc: Node3D = get_tree().root.get_node("Main/Game/").game_data.npcs[id].instantiate()
 			add_child(npc, true)
+		2:
+			var pickable: ItemPickable = load(get_tree().root.get_node("Main/Game/").game_data.items[id].pickable_path).instantiate()
+			pickable.position = pos
+			add_child(pickable, true)
 ## Remote Method to remove all items on clients
 @rpc("authority", "call_local")
 func client_remove_object():

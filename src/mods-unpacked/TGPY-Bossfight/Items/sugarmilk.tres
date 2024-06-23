@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://brmpb7nq1dkke"]
+
+[ext_resource type="Script" path="res://InventorySystem/Items/Item.gd" id="1_xdnhm"]
+[ext_resource type="Texture2D" uid="uid://tmu5b4tfwy14" path="res://mods-unpacked/TGPY-Bossfight/Items/Res/item_milk.png" id="2_v6ovn"]
+
+[resource]
+script = ExtResource("1_xdnhm")
+id = 2
+name = "Sugar milk"
+texture = ExtResource("2_v6ovn")
+size = Vector2i(1, 1)
+pickable_path = "res://mods-unpacked/TGPY-Bossfight/Items/Pickables/item_sugarmilk.tscn"
+pickup_sound_path = "res://Sounds/Interact/impactMetal_light_001.ogg"
+first_person_prefab_path = "res://mods-unpacked/TGPY-Bossfight/Items/FPPrefab/sugarmilk.tscn"
+one_time_use = true
+upgrade_rough = Array[int]([])
+upgrade_coarse = Array[int]([])
+upgrade_one_to_one = Array[int]([])
+upgrade_fine = Array[int]([])
+upgrade_very_fine = Array[int]([])

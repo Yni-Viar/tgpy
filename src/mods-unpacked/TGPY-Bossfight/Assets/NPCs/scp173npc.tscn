@@ -5027,16 +5027,6 @@ properties/0/replication_mode = 2
 collision_layer = 16
 collision_mask = 7
 script = ExtResource("1_51ihs")
-speed = null
-is_watching = null
-boss_name = null
-health = null
-has_abilities = null
-abilities_cooldown = null
-target = null
-dormant = null
-boss_music_id = null
-after_boss_music_id = null
 
 [node name="SCP173_Rig" type="Node3D" parent="."]
 transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, -1.35785, 0)

@@ -34,7 +34,7 @@ func _on_sense_body_entered(body):
 			$Timer.start(1.0)
 			dormant = false
 			target.append(body.name)
-			boss_appear(body)
+			boss_appear()
 
 
 func _on_sense_body_exited(body):
@@ -45,7 +45,7 @@ func _on_sense_body_exited(body):
 					$Timer.stop()
 					dormant = true
 			target.erase(body.name)
-			boss_dissapear(body)
+			boss_dissapear()
 
 func attack():
 	var type_of_attack: int = 0#rng.randi_range(0, 1)

@@ -114,14 +114,6 @@ func _input(event):
 	#direction.x = -Input.get_action_strength("move_left") + Input.get_action_strength("move_right")
 	#direction = direction.normalized().rotated(Vector3.UP, rotation.y)
 	
-	# Handling the options menu
-	#if Input.is_action_just_pressed("ui_cancel"):
-		#if Input.MOUSE_MODE_CAPTURED:
-			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-#			is_options_menu_displayed = true
-		#else:
-			#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-#			is_options_menu_displayed = false
 	if Input.is_action_just_pressed("mode_kinematic"):
 		get_parent().get_node("PlayerUI").visible = !get_parent().get_node("PlayerUI").visible
 
@@ -164,7 +156,7 @@ func _physics_process(delta):
 					collided_with.call("interact_alt", self)
 				elif collided_with is InteractableRigidBody:
 					collided_with.call("interact_alt", self)
-		get_parent().get_node("PlayerUI/HealthBar").value = ceil(current_health[0])
+		get_parent().get_node("PlayerUI/HealthBar").value = current_health[0]
 	set_up_direction(Vector3.UP)
 	move_and_slide()
 ## Rotates player with touchscreen (if available)
@@ -175,6 +167,42 @@ func rotate_player_with_touchscreen():
 	var camera_rot = player_head.rotation_degrees
 	camera_rot.x = clamp(player_head.rotation_degrees.x, -85, 85)
 	player_head.rotation_degrees = camera_rot
+
+## Used for item holding
+@rpc("any_peer", "call_local")
+func hold_item(item_id: int):
+	if item_id >= 0 && item_id < get_tree().root.get_node("Main/Game").game_data.items.size():
+		var check = get_node("PlayerModel").get_child(0)
+		if check == null:
+			return
+		var path = str(check.get_path()) + "/" + check.armature_name + "/Skeleton3D/ItemAttachment/ItemInHand"
+		if check.get_node_or_null(str(check.get_path()) + "/" + check.armature_name + "/Skeleton3D/ItemAttachment/ItemInHand") != null && !is_multiplayer_authority():
+			$PlayerHead/PlayerRecoil/PlayerHand.hide()
+			var path_to_item_hold: Marker3D = check.get_node(str(check.get_path()) + "/" + check.armature_name + "/Skeleton3D/ItemAttachment/ItemInHand")
+			for node in path_to_item_hold.get_children():
+				node.queue_free()
+			var pickable: ItemPickable = load(get_tree().root.get_node("Main/Game").game_data.items[item_id].pickable).instantiate()
+			pickable.freeze = true
+			path_to_item_hold.add_child(pickable)
+		else:
+			$PlayerHead/PlayerRecoil/PlayerHand.show()
+		if $PlayerHead/PlayerRecoil/PlayerHand.visible:
+			for node in $PlayerHead/PlayerRecoil/PlayerHand.get_children():
+				node.queue_free()
+			var item_use: ItemUse = load(get_tree().root.get_node("Main/Game").game_data.items[item_id].first_person_prefab_path).instantiate()
+			item_use.one_time_use = get_tree().root.get_node("Main/Game").game_data.items[item_id].one_time_use
+			item_use.index = item_id
+			$PlayerHead/PlayerRecoil/PlayerHand.add_child(item_use)
+	else:
+		var check = get_node("PlayerModel").get_child(0)
+		if check == null:
+			return
+		if check.get_node_or_null(str(check.get_path()) + "/" + check.armature_name + "/Skeleton3D/ItemAttachment/ItemInHand") != null:
+			var path_to_item_hold: Marker3D = check.get_node(str(check.get_path()) + "/" + check.armature_name + "/Skeleton3D/ItemAttachment/ItemInHand")
+			for node in path_to_item_hold.get_children():
+				node.queue_free()
+		for node in $PlayerHead/PlayerRecoil/PlayerHand.get_children():
+			node.queue_free()
 
 ## Animation-based footstep system.
 func footstep_animate():
@@ -201,7 +229,7 @@ func health_manage(amount: float, type_of_health: int, deplete_reason: String):
 		if current_health[type_of_health] + amount <= health[type_of_health]:
 			current_health[type_of_health] += amount
 		else:
-			current_health[type_of_health] == health[type_of_health]
+			current_health[type_of_health] = health[type_of_health]
 	else:
 		print("You cannot change HP for dead")
 	if current_health[type_of_health] <= 0:
@@ -229,15 +257,6 @@ func camera_manager(default_camera: bool):
 ## Updates class UI
 func update_class_ui(color: int):
 	var class_color: Color = Color(color)
-	#if get_parent().get_node("PlayerUI/HealthBar").has_theme_stylebox_override("fill"):
-		#get_parent().get_node("PlayerUI/HealthBar").remove_theme_stylebox_override("fill")
-		#var class_represent: StyleBoxFlat = StyleBoxFlat.new()
-		#class_represent.corner_radius_bottom_left = 8
-		#class_represent.corner_radius_bottom_right = 8
-		#class_represent.corner_radius_top_left = 8
-		#class_represent.corner_radius_top_right = 8
-		#class_represent.set_bg_color(class_color)
-		#get_parent().get_node("PlayerUI/HealthBar").add_theme_stylebox_override("fill", class_represent)
 	get_parent().get_node("PlayerUI/HealthBar").tint_progress = class_color
 	get_parent().get_node("PlayerUI/HealthBar").max_value = health[0]
 	get_parent().get_node("PlayerUI/HealthBar").value = current_health[0]

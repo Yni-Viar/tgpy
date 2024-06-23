@@ -163,6 +163,7 @@ text = "[b]v.0.1.0-dev[/b] [i](Alpha)[/i]
 - There may be freezes. Try to restart the game to fix this.
 - Support for old PCs (and maybe for Android) cannot be provided, due to some of the game mechanics are not available in Godot OpenGL. This should be fixed in Godot 4.3. [i]Waiting for Godot...[/i]
 - Connecting to ongoing game may be unstable.
+- Hold item animation on player model is missing.
 - Hand rigs and ragdolls are just... meh...
 
 
@@ -392,6 +393,23 @@ text = "[i]First person character (license - The Unlicense)[/i]
 "
 fit_content = true
 
+[node name="CreditsCode3" type="RichTextLabel" parent="CreditsPanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1234, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[i]Scalable inventory system (license - The Unlicense)[/i]
+
+- Created by hamburgear , edited by Yni.
+
+
+"
+fit_content = true
+
 [node name="CreditsCode4" type="RichTextLabel" parent="CreditsPanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1234, 0)
 layout_mode = 2
@@ -467,6 +485,8 @@ text = "[i]Models[/i]
 - Charlotte - by Yni, made with MPFB2
 - SCP-173 model - Aruspice (model, textures), Shakles (rig, animation), PixelPuffin (concept art) (license - CC-BY-SA 3.0)
 - Parts of close icon - by Microsoft Corporation. (license - CC-BY 4.0)
+- Sci fi shotgun - made by Ed Eien No Janed, license CC-BY
+- Bossfight level, Electrobun boss, Elevator, Cable car models are made by Yni. License CC-BY.
 "
 fit_content = true
 

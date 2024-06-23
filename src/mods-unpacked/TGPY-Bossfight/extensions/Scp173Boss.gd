@@ -31,7 +31,7 @@ func _physics_process(delta):
 		if collided_with is PlayerScript:
 			if collided_with.unique_type_id == -1:
 				collided_with.rpc("health_manage", -16777216, 0, "Crunched by the Statue")
-				super.boss_dissapear(collided_with)
+				rpc_id(int(collided_with.name), "boss_dissapear")
 
 func _on_sense_body_entered(body):
 	if body is PlayerScript:
@@ -39,7 +39,7 @@ func _on_sense_body_entered(body):
 			target.append(body.name)
 			current_target = body.name
 			dormant = false
-			boss_appear(body)
+			boss_appear()
 
 
 func _on_sense_body_exited(body):
@@ -52,11 +52,7 @@ func _on_sense_body_exited(body):
 				else:
 					current_target = target[rng.randi_range(0, target.size() - 1)]
 			target.erase(body.name)
-			boss_dissapear(body)
-
-func boss_dissapear(body):
-	super.boss_dissapear(body)
-	queue_free()
+			boss_dissapear()
 
 
 func _on_dont_look_at_me_screen_entered():

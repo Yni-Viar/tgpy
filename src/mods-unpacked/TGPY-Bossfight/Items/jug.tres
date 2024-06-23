@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bvirckj55g58y"]
+
+[ext_resource type="Script" path="res://InventorySystem/Items/Item.gd" id="1_04uf7"]
+[ext_resource type="Texture2D" uid="uid://cnwdsitolbnrc" path="res://mods-unpacked/TGPY-Bossfight/Items/Res/item_jug.png" id="2_bh48i"]
+
+[resource]
+script = ExtResource("1_04uf7")
+id = 1
+name = "Jug with water"
+texture = ExtResource("2_bh48i")
+size = Vector2i(1, 1)
+pickable_path = "res://mods-unpacked/TGPY-Bossfight/Items/Pickables/item_jug.tscn"
+pickup_sound_path = "res://Sounds/Interact/impactMetal_light_001.ogg"
+first_person_prefab_path = "res://mods-unpacked/TGPY-Bossfight/Items/FPPrefab/jug.tscn"
+one_time_use = true
+upgrade_rough = Array[int]([])
+upgrade_coarse = Array[int]([])
+upgrade_one_to_one = Array[int]([])
+upgrade_fine = Array[int]([])
+upgrade_very_fine = Array[int]([])

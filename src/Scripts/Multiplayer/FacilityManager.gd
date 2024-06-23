@@ -113,7 +113,7 @@ func set_player_class_public(player_name: String, name_of_class: int):
 	get_node(player_name).footstep_sounds = class_data.footstep_sounds
 	get_node(player_name).sprint_sounds = class_data.sprint_sounds
 	get_node(player_name).health = class_data.health
-	get_node(player_name).current_health = class_data.health
+	get_node(player_name).current_health = class_data.health.duplicate()
 	get_node(player_name).ragdoll_source = class_data.player_ragdoll_source
 	load_models(player_name, name_of_class)
 

@@ -2,7 +2,7 @@ extends Resource
 class_name GameData
 
 @export var classes: Array[BaseClass]
-# @export var items
+@export var items: Array[Item]
 @export var map_objects: Array[PackedScene]
 @export var npcs: Array[PackedScene]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://mu7j26by23js"]
+[gd_scene load_steps=112 format=3 uid="uid://mu7j26by23js"]
 
 [ext_resource type="Script" path="res://mods-unpacked/TGPY-Bossfight/extensions/Multiplayer/SampleGameMode.gd" id="1_w8cma"]
 [ext_resource type="Resource" uid="uid://dexygxjm8ki08" path="res://mods-unpacked/TGPY-Bossfight/GameData/GameData.tres" id="2_jv31r"]
@@ -46,6 +46,9 @@
 [ext_resource type="Texture2D" uid="uid://nfri6qslyqwr" path="res://Assets/Models/Doors/DoorLCZ/Door_Texturize_door_Metallic_png-Door_Texturize_door_Roughness_png.png" id="30_el32l"]
 [ext_resource type="Script" path="res://mods-unpacked/TGPY-Bossfight/extensions/NotSoSimpleButton.gd" id="31_ic2su"]
 [ext_resource type="PackedScene" uid="uid://dh4m7rjsj1cdq" path="res://mods-unpacked/TGPY-Bossfight/Assets/NPCs/electrobunnpc.tscn" id="32_feomm"]
+[ext_resource type="Script" path="res://mods-unpacked/TGPY-Bossfight/extensions/FirstElevator.gd" id="45_hfrpx"]
+[ext_resource type="PackedScene" uid="uid://b5nimjpfvd0vp" path="res://mods-unpacked/TGPY-Bossfight/Items/Pickables/item_shotgun.tscn" id="47_jmcyy"]
+[ext_resource type="PackedScene" uid="uid://e7bq8urxofi1" path="res://mods-unpacked/TGPY-Bossfight/Items/Pickables/item_jug.tscn" id="48_vj41o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4g4w"]
 bg_color = Color(0, 0, 0, 1)
@@ -939,6 +942,8 @@ script = ExtResource("17_g7lu3")
 positions = Array[String](["Main/Game/Office/entityspawn", "Main/Game/TestScene2/entityspawn", "Main/Game/TestScene3/entityspawn"])
 
 [node name="Items" type="Node" parent="."]
+script = ExtResource("3_3et5x")
+object_type = 2
 
 [node name="MapObjects" type="Node" parent="."]
 script = ExtResource("3_3et5x")
@@ -1135,6 +1140,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.9958, 132.956, 0)
 [node name="entityspawn" type="Marker3D" parent="TestScene3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.89063, 0.631391)
 
+[node name="shotgun" parent="TestScene3" instance=ExtResource("47_jmcyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.55701, 0.5, 4.12198)
+
+[node name="metal_jug_2k" parent="TestScene3" instance=ExtResource("48_vj41o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.747, 0.5, -0.0460205)
+
+[node name="metal_jug_2k2" parent="TestScene3" instance=ExtResource("48_vj41o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.428, 0.5, 0.807983)
+
+[node name="metal_jug_2k3" parent="TestScene3" instance=ExtResource("48_vj41o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.863, 0.5, 1.944)
+
+[node name="metal_jug_2k4" parent="TestScene3" instance=ExtResource("48_vj41o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.574, 0.5, 2.79797)
+
 [node name="TestScene2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 169.019, 0)
 script = ExtResource("16_mt64p")
@@ -1250,14 +1270,8 @@ transform = Transform3D(-0.0121122, 0, 0.999927, 0, 1, 0, -0.999927, 0, -0.01211
 
 [node name="scp173" parent="TestScene2" instance=ExtResource("22_lbssu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71785, 1.51243, 11.4841)
-speed = 40.0
-is_watching = false
 boss_name = "SCULPTURE"
 health = 1000.0
-has_abilities = false
-abilities_cooldown = 0.0
-target = Array[String]([])
-dormant = true
 boss_music_id = 1
 after_boss_music_id = 0
 
@@ -1308,6 +1322,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.0365, 0)
 
 [node name="Elevator" parent="." instance=ExtResource("16_afaw3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 18.4073, -10.877)
+script = ExtResource("45_hfrpx")
 floors = Array[Resource("res://Scripts/ElevatorSystem/ElevatorFloor.gd")]([ExtResource("26_ef71u"), ExtResource("27_5dsh6")])
 speed = 3.0
 current_floor = 1
@@ -1349,6 +1364,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -678.565, 54.1343)
 shape = SubResource("BoxShape3D_7svji")
 
 [node name="Label3D" type="Label3D" parent="."]
+
+[node name="shotgun" parent="." instance=ExtResource("47_jmcyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 743.154, 122.853, -352.49)
+
+[node name="shotgun2" parent="." instance=ExtResource("47_jmcyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 746.137, 122.853, -351.992)
+
+[node name="shotgun3" parent="." instance=ExtResource("47_jmcyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 742.881, 122.853, -353.656)
+
+[node name="metal_jug_2k" parent="." instance=ExtResource("48_vj41o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 743.488, 122.853, -350.773)
+
+[node name="metal_jug_2k2" parent="." instance=ExtResource("48_vj41o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 742.694, 122.853, -351.648)
+
+[node name="metal_jug_2k3" parent="." instance=ExtResource("48_vj41o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 738.703, 122.853, -349.111)
+
+[node name="metal_jug_2k4" parent="." instance=ExtResource("48_vj41o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 739.66, 122.853, -349.012)
+
+[node name="metal_jug_2k5" parent="." instance=ExtResource("48_vj41o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 739.912, 122.853, -351.12)
 
 [connection signal="pressed" from="PlayerUI/AdminConsole/ContinueBtn" to="PlayerUI/AdminConsole" method="_on_continue_btn_pressed"]
 [connection signal="pressed" from="PlayerUI/PauseMenu/Panel/ExitButton" to="PlayerUI" method="_on_exit_button_pressed"]

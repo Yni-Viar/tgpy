@@ -78,8 +78,6 @@ laser_beam_src = ExtResource("2_osy55")
 boss_name = "ELECTROBUN"
 health = 2500.0
 boss_music_id = 2
-boss_end_music_enable = true
-boss_end_music_id = 3
 after_boss_music_id = 0
 
 [node name="Icosphere" type="MeshInstance3D" parent="."]

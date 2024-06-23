@@ -28,6 +28,10 @@ func _ready():
 		if !elevator_doors.is_empty():
 			get_tree().root.get_node("Main/" + elevator_doors[current_floor]).door_open()
 		door_open()
+	on_start()
+
+func on_start():
+	pass
 
  # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -62,6 +66,10 @@ func _physics_process(delta):
 						changed_launch_state.emit(false)
 						get_node("Move").stop()
 						rpc("open_dest_doors")
+	on_update(delta)
+
+func on_update(delta):
+	pass
 
 # Open the door
 func door_open():

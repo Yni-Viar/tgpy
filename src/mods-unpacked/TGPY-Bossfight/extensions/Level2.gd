@@ -5,6 +5,7 @@ extends StaticBody3D
 
 func _on_scp_173_defeated():
 	$CableCarLaunch.enabled = true
+	$scp173.queue_free()
 
 
 func _on_elevator_changed_launch_state(start):
