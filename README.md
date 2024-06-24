@@ -1,6 +1,6 @@
 # Project "Team Game Platform by Yni"
 ## Info.
-### ⚠ Currently, this project is deprecated, and serves only for an example of team game.
+### ⚠ Currently, this project is deprecated, and serves only for an example of team game (and it is buggy in multiplayer...)
 A moddable multiplayer game platform. Currently in *alpha* state of development, and is unfinished.
 Previously, this platform was the part of *SCP: Site Online*, but now it is a fully rewritten on GDScript platform to enable mod support.
 

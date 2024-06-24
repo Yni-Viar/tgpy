@@ -1,44 +1,56 @@
 extends Node3D
+## Gameplay manager
+## Made by Yni, licensed under MIT license.
 class_name FacilityManager
 
+## Nickname
 var local_nickname: String
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var env: WorldEnvironment
-var player_scene: CharacterBody3D
+## Path to world environment
 @export var environment_path: String
+## Level data (contains list of all classes, items, e.t.c)
 @export var game_data: GameData
+## Level main music
 @export var music_to_play: Array[String] = []
-# var player_teams: Array[Array]
+## Max spawnable objects (set by NetworkManager)
 @export var max_spawnable_objects: int = 12
+## Round start check.
 @export var is_round_started: bool
-@export var player_prefab_path: String
+## Player scene, that will become a player afterwards
+@export var player_prefab: PackedScene
+## List of the players
 @export var players_list: Array[int] = []
-@export var tickets: Array[int] = []
+# Player tickets
+#@export var tickets: Array[int] = []
+## Ambient file path, used by Music Changer function
 var current_ambient: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().root.get_node("Main/LoadingScreen/").visible = false
 	env = get_node("WorldEnvironment")
-	
-	if env.environment == null:
-		env.environment = load("res://FacilityGraphics.tres")
+	## Load graphics
+	if env.environment == null || environment_path.is_empty():
+		env.environment = load("res://DefaultGraphics.tres")
 	else:
 		env.environment = load(environment_path)
-	
+	## Set user settings
 	env.environment.sdfgi_enabled = Settings.dynamic_gi
 	env.environment.ssao_enabled = Settings.ssao
 	env.environment.ssil_enabled = Settings.ssil
 	env.environment.ssr_enabled = Settings.ssr
 	env.environment.glow_enabled = Settings.glow
-	
+	## Set background music through music ID.
 	if music_to_play.size() > 0:
 		set_background_music(music_to_play[0])
 	on_start()
 	if multiplayer.is_server():
+		## Server methods
 		max_spawnable_objects = get_parent().max_objects
 		multiplayer.peer_connected.connect(add_player)
 		multiplayer.peer_disconnected.connect(remove_player)
+		## Add players
 		for id in multiplayer.get_peers():
 			add_player(id)
 		add_player(1)
@@ -59,13 +71,14 @@ func on_server_start():
 func on_update(delta: float):
 	pass
 
-
 ## Adds player to server.
 func add_player(id: int):
-	player_scene = load(player_prefab_path).instantiate()
+	## Player scene, that will become a player afterwards
+	var player_scene: CharacterBody3D
+	player_scene = player_prefab.instantiate()
 	player_scene.name = str(id)
 	add_child(player_scene, true)
-	players_list.append(int(str(player_scene.name)))
+	players_list.append(player_scene.name.to_int())
 	if is_round_started:
 		post_round_start(players_list, id)
 	print("Player " + str(id) + " has joined the server!")
@@ -119,11 +132,11 @@ func set_player_class_public(player_name: String, name_of_class: int):
 
 ## Recall player classes for player, which got connected to ongoing round.
 func post_round_start(players, target):
-	rpc_id(target, "set_player_class", str(player_scene.name), 0, "Post-roundstart arrival", false)
+	rpc_id(target, "set_player_class", str(multiplayer.get_unique_id()), 0, "Post-roundstart arrival", false)
 	for player in players:
-		if player != player_scene.name:
-			rpc_id(target, "set_player_class", str(player), get_node(player).class_key, "Previous player", true)
-	rpc("clean_ragdolls")
+		if str(player) != str(multiplayer.get_unique_id()):
+			rpc_id(target, "set_player_class", str(player), get_node(str(player)).player_class_key, "Previous player", true)
+	#rpc("clean_ragdolls")
 
 ## Loads the models of a player.
 func load_models(player_name: String, class_id: int):
@@ -160,4 +173,3 @@ func set_background_music(to: String):
 		$BackgroundMusic.playing = true
 		$AnimationPlayer.play_backwards("music_change")
 		current_ambient = to
-

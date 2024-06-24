@@ -51,6 +51,7 @@ func host():
 	peer.create_server(port, max_players)
 	multiplayer.multiplayer_peer = peer
 	load_game(get_gamemode())
+	$MultiplayerSpawner.add_spawnable_scene(get_gamemode())
 	get_tree().root.get_node("Main/CanvasLayer/MainMenu").hide()
 ## General join method.
 func join():
@@ -60,7 +61,6 @@ func join():
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 	multiplayer.server_disconnected.connect(server_disconnected)
-	load_game(get_gamemode())
 	get_tree().root.get_node("Main/CanvasLayer/MainMenu").hide()
 
 ## Loads the game server-side.

@@ -1,8 +1,9 @@
-[gd_scene load_steps=112 format=3 uid="uid://mu7j26by23js"]
+[gd_scene load_steps=113 format=3 uid="uid://mu7j26by23js"]
 
 [ext_resource type="Script" path="res://mods-unpacked/TGPY-Bossfight/extensions/Multiplayer/SampleGameMode.gd" id="1_w8cma"]
 [ext_resource type="Resource" uid="uid://dexygxjm8ki08" path="res://mods-unpacked/TGPY-Bossfight/GameData/GameData.tres" id="2_jv31r"]
 [ext_resource type="Script" path="res://Scripts/MapObjectManager.gd" id="3_3et5x"]
+[ext_resource type="PackedScene" uid="uid://cu440emlhve1m" path="res://FPSController/PlayerScene.tscn" id="3_6tvh0"]
 [ext_resource type="Script" path="res://mods-unpacked/TGPY-Bossfight/extensions/Multiplayer/AdminCommands.gd" id="3_uim36"]
 [ext_resource type="FontFile" uid="uid://opo2t8tyqcfa" path="res://Assets/Fonts/Stengazeta/Stengazeta-Regular_5.ttf" id="5_strxu"]
 [ext_resource type="Environment" uid="uid://cpjkvy5s2l8ae" path="res://FacilityGraphics.tres" id="5_u1dtw"]
@@ -167,33 +168,12 @@ _data = {
 }
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pw38j"]
-properties/0/path = NodePath("MapGenLcz:seed")
+properties/0/path = NodePath(".:players_list")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-properties/1/path = NodePath("MapGenHcz:seed")
+properties/1/path = NodePath(".:is_round_started")
 properties/1/spawn = true
-properties/1/replication_mode = 2
-properties/2/path = NodePath("MapGenRz:seed")
-properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath(".:playersList")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath(".:isRoundStarted")
-properties/4/spawn = true
-properties/4/replication_mode = 1
-properties/5/path = NodePath(".:tickets")
-properties/5/spawn = true
-properties/5/replication_mode = 2
-properties/6/path = NodePath(".:targets")
-properties/6/spawn = true
-properties/6/replication_mode = 2
-properties/7/path = NodePath(".:maxSpawnableObjects")
-properties/7/spawn = true
-properties/7/replication_mode = 2
-properties/8/path = NodePath(".:omegaWarheadKeycode")
-properties/8/spawn = true
-properties/8/replication_mode = 2
+properties/1/replication_mode = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_ubhwt"]
 
@@ -579,7 +559,7 @@ script = ExtResource("1_w8cma")
 environment_path = "res://FacilityGraphics.tres"
 game_data = ExtResource("2_jv31r")
 music_to_play = Array[String](["res://Sounds/Music/Zen.ogg", "res://mods-unpacked/TGPY-Bossfight/Sounds/Music/SCP-x3x.ogg", "res://mods-unpacked/TGPY-Bossfight/Sounds/Music/DEgITx_-_Moon_begin.ogg", "res://mods-unpacked/TGPY-Bossfight/Sounds/Music/DEgITx_-_Moon_end.ogg"])
-player_prefab_path = "res://FPSController/PlayerScene.tscn"
+player_prefab = ExtResource("3_6tvh0")
 
 [node name="PlayerUI" type="Control" parent="."]
 layout_mode = 3
